@@ -1,0 +1,67 @@
+{
+	"name": "vue-i18n-manage",
+	"displayName": "vue-i18n-manage",
+	"description": "A plguin based on vscode that is targeted for international file management.",
+	"version": "0.0.1",
+	"engines": {
+		"vscode": "^1.33.0"
+	},
+	"categories": [
+		"Other"
+	],
+	"activationEvents": [
+		"onCommand:extension.helloWorld"
+	],
+	"main": "./out/extension.js",
+	"contributes": {
+		"commands": [
+			{
+				"command": "extension.helloWorld",
+				"title": "Hello World",
+				"icon":{
+					"light": "./src/imgs/logo.png",
+					"dark": "./src/imgs/logo.png"
+				}
+			}
+		],
+		"menus": {
+			"editor/title": [
+				{
+					"when": "editorFocus",
+					"command": "extension.helloWorld",
+					"group": "navigation"
+				}
+			]
+		},
+		"configuration": {
+      "type": "object",
+      "title": "Vue-i18n",
+      "properties": {
+        "vue-i18n.i18nPaths": {
+          "type": "string",
+          "default": "",
+          "description": "翻译文件的目录（相对于根目录）"
+        },
+        "vue-i18n.sourceLocale": {
+          "type": "string",
+          "default": "zh-CN",
+          "description": "机器翻译源语言"
+        }
+      }
+    }
+	},
+	"scripts": {
+		"vscode:prepublish": "npm run compile",
+		"compile": "tsc -p ./",
+		"watch": "tsc -watch -p ./",
+		"postinstall": "node ./node_modules/vscode/bin/install",
+		"test": "npm run compile && node ./node_modules/vscode/bin/test"
+	},
+	"devDependencies": {
+		"typescript": "^3.3.1",
+		"vscode": "^1.1.28",
+		"tslint": "^5.12.1",
+		"@types/node": "^10.12.21",
+		"@types/mocha": "^2.2.42"
+	}
+}
