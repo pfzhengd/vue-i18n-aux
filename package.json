@@ -10,7 +10,8 @@
 		"Other"
 	],
 	"activationEvents": [
-		"onCommand:extension.helloWorld"
+		"onCommand:extension.helloWorld",
+		"onCommand:catCoding.start"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
@@ -22,7 +23,12 @@
 					"light": "./src/imgs/logo.png",
 					"dark": "./src/imgs/logo.png"
 				}
-			}
+			},
+			{
+        "command": "catCoding.start",
+        "title": "Start new cat coding session",
+        "category": "Cat Coding"
+      }
 		],
 		"menus": {
 			"editor/title": [
