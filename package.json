@@ -11,7 +11,8 @@
 	],
 	"activationEvents": [
 		"onCommand:extension.helloWorld",
-		"onCommand:catCoding.start"
+		"onCommand:catCoding.start",
+		"onCommand:catCoding.doRefactor"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
@@ -28,7 +29,12 @@
         "command": "catCoding.start",
         "title": "Start new cat coding session",
         "category": "Cat Coding"
-      }
+			},
+			{
+				"command": "catCoding.doRefactor",
+				"title":"Testing postMessage to send a message.",
+				"category": "Cat Coding"
+			}
 		],
 		"menus": {
 			"editor/title": [
