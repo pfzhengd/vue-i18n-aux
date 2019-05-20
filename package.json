@@ -10,7 +10,7 @@
 		"Other"
 	],
 	"activationEvents": [
-		"onCommand:extension.helloWorld",
+		"onCommand:extension.config",
 		"onCommand:catCoding.start",
 		"onCommand:catCoding.doRefactor"
 	],
@@ -18,20 +18,20 @@
 	"contributes": {
 		"commands": [
 			{
-				"command": "extension.helloWorld",
-				"title": "Hello World",
+				"command": "extension.config",
+				"title": "Configure the path to the data source.",
 				"icon":{
 					"light": "./src/imgs/logo.png",
 					"dark": "./src/imgs/logo.png"
 				}
 			},
 			{
-        "command": "catCoding.start",
+        "command": "extension.start",
         "title": "Start new cat coding session",
         "category": "Cat Coding"
 			},
 			{
-				"command": "catCoding.doRefactor",
+				"command": "extension.doRefactor",
 				"title":"Testing postMessage to send a message.",
 				"category": "Cat Coding"
 			}
@@ -40,24 +40,19 @@
 			"editor/title": [
 				{
 					"when": "editorFocus",
-					"command": "extension.helloWorld",
+					"command": "extension.config",
 					"group": "navigation"
 				}
 			]
 		},
 		"configuration": {
       "type": "object",
-      "title": "Vue-i18n",
+      "title": "vue-i18n-manage",
       "properties": {
-        "vue-i18n.i18nPaths": {
+        "vue-i18n-manage.paths": {
           "type": "string",
           "default": "",
-          "description": "翻译文件的目录（相对于根目录）"
-        },
-        "vue-i18n.sourceLocale": {
-          "type": "string",
-          "default": "zh-CN",
-          "description": "机器翻译源语言"
+          "description": "Path to recording the data source."
         }
       }
     }
