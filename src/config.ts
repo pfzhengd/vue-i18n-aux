@@ -1,16 +1,22 @@
 import * as vscode from "vscode";
 
 class Config{
- get():string{
-   return '';
+ key:string = 'vue-i18n-manage';
+ get():string|undefined{
+   const value:string | undefined = vscode.workspace.getConfiguration(this.key).get('paths');
+   return value;
  }
- set():void{
-
+ async set():Promise<void>{
+  const dirs =await vscode.window.showOpenDialog({
+    defaultUri:vscode.Uri.file(vscode.workspace.rootPath||''),
+    canSelectFolders:true
+  });
+  vscode.workspace.getConfiguration(this.key).update('paths',dirs);
  }
 }
 
 export default () => {
   return vscode.commands.registerCommand('extension.config',()=>{
-    new Config();
+    new Config().set();
   })
 };

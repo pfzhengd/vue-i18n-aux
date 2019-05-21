@@ -13,7 +13,13 @@ class Preview implements vscode.HoverProvider {
     return new vscode.Hover(contents);
   }
   getI18nkey(document:vscode.TextDocument,position:vscode.Position):string{
-    return '';
+    console.log(document.getText());
+    const range:vscode.Range|undefined = document.getWordRangeAtPosition(position,/\$t\([^\)]+\)/ig);
+    if(!range){
+      return '';
+    }
+    const text:string = document.getText(range);
+    return text.replace(/\$t|\(|\)/ig,'');
   }
   getI18nValue(i18nKey:string):Array<string>{
     return [];
