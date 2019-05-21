@@ -1,19 +1,16 @@
 import * as vscode from "vscode";
 
-class Source {
-  constructor() {
-    this.init();
-  }
-  async init() {
-    const dirs = await vscode.window.showOpenDialog({
-      defaultUri:vscode.Uri.file(vscode.workspace.rootPath||''),
-      canSelectFolders:true
-    });
-  }
+class Config{
+ get():string{
+   return '';
+ }
+ set():void{
+
+ }
 }
 
 export default () => {
   return vscode.commands.registerCommand('extension.config',()=>{
-    new Source();
+    new Config();
   })
 };

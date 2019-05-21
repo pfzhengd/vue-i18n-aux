@@ -6,17 +6,20 @@ class Preview implements vscode.HoverProvider {
     position: vscode.Position,
     token: vscode.CancellationToken
   ): vscode.ProviderResult<vscode.Hover> {
-    console.log('document',document.getText());
-    const range = document.getWordRangeAtPosition(
-      position,
-      /(?:\$t|\$tc|\$d|\$n|\$te|this\.t|i18n\.t|[^\w]t)\(['"]([^]+?)['"]/g
-    );
-    if(!range){
-      return undefined;
-    }
-    const text = document.getText(range);
-    const contents = new vscode.MarkdownString("**" + text + "**");
+    const i18nKey:string = this.getI18nkey(document,position);
+    const i18nValues:Array<string> = this.getI18nValue(i18nKey);
+    const text:string = this.render(i18nValues);
+    const contents:vscode.MarkdownString = new vscode.MarkdownString(text);
     return new vscode.Hover(contents);
+  }
+  getI18nkey(document:vscode.TextDocument,position:vscode.Position):string{
+    return '';
+  }
+  getI18nValue(i18nKey:string):Array<string>{
+    return [];
+  }
+  render(i18nValue:Array<string>):string{
+    return '**render**';
   }
 }
 
