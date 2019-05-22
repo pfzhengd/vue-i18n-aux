@@ -12,7 +12,7 @@ export class Common {
    * @returns
    * @memberof Common
    */
-  static isUndefined(obj: any) {
+  static isUndefined(obj: any):Boolean {
     return typeof obj === "undefined";
   }
 
@@ -39,7 +39,7 @@ export class Common {
    * @returns {string}
    * @memberof Common
    */
-  static readFileContent(absolutePath: string):string {
+  static readFileContent(absolutePath: string) {
     try {
       const content = fs.readFileSync(absolutePath, { encoding: "utf-8" });
       return JSON.parse(content);
@@ -47,7 +47,7 @@ export class Common {
       vscode.window.showErrorMessage(`
         Is read path [${absolutePath}] file when an exception occurs,the output format may not be in accordance with the contents of JSON.
       `);
-      return '';
+      return {};
     }
   }
 
@@ -72,7 +72,7 @@ export class Common {
   static getData() {
     const configPath: string = this.getConfigPath() || "";
     const fiels: Array<string> = this.readDirectory(configPath);
-    let data = {};
+    let data:object = {};
 
     fiels.map(file => {
       const absolutePath: string = path.resolve(configPath, file);

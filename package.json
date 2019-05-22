@@ -10,9 +10,7 @@
 		"Other"
 	],
 	"activationEvents": [
-		"onCommand:extension.config",
-		"onCommand:catCoding.start",
-		"onCommand:catCoding.doRefactor"
+		"onCommand:extension.config"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
@@ -24,16 +22,6 @@
 					"light": "./src/imgs/logo.png",
 					"dark": "./src/imgs/logo.png"
 				}
-			},
-			{
-				"command": "extension.start",
-				"title": "Start new cat coding session",
-				"category": "Cat Coding"
-			},
-			{
-				"command": "extension.doRefactor",
-				"title": "Testing postMessage to send a message.",
-				"category": "Cat Coding"
 			}
 		],
 		"menus": {
