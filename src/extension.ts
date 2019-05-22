@@ -7,4 +7,4 @@ export function activate(context:vscode.ExtensionContext){
   ].map(module=>{
     context.subscriptions.push(module());
   });
-};
+}

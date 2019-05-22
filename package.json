@@ -20,19 +20,19 @@
 			{
 				"command": "extension.config",
 				"title": "Configure the path to the data source.",
-				"icon":{
+				"icon": {
 					"light": "./src/imgs/logo.png",
 					"dark": "./src/imgs/logo.png"
 				}
 			},
 			{
-        "command": "extension.start",
-        "title": "Start new cat coding session",
-        "category": "Cat Coding"
+				"command": "extension.start",
+				"title": "Start new cat coding session",
+				"category": "Cat Coding"
 			},
 			{
 				"command": "extension.doRefactor",
-				"title":"Testing postMessage to send a message.",
+				"title": "Testing postMessage to send a message.",
 				"category": "Cat Coding"
 			}
 		],
@@ -46,16 +46,16 @@
 			]
 		},
 		"configuration": {
-      "type": "object",
-      "title": "vue-i18n-manage",
-      "properties": {
-        "vue-i18n-manage.paths": {
-          "type": "string",
-          "default": "",
-          "description": "Path to recording the data source."
-        }
-      }
-    }
+			"type": "object",
+			"title": "vue-i18n-manage",
+			"properties": {
+				"vue-i18n-manage.path": {
+					"type": "string",
+					"default": "",
+					"description": "Path to recording the data source."
+				}
+			}
+		}
 	},
 	"scripts": {
 		"vscode:prepublish": "npm run compile",
@@ -70,5 +70,8 @@
 		"tslint": "^5.12.1",
 		"@types/node": "^10.12.21",
 		"@types/mocha": "^2.2.42"
+	},
+	"dependencies": {
+		"deepmerge": "^3.2.0"
 	}
 }

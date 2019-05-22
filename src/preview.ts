@@ -1,4 +1,5 @@
 import * as vscode from "vscode";
+import { Common } from "./common";
 
 class Preview implements vscode.HoverProvider {
   public provideHover(
@@ -6,26 +7,33 @@ class Preview implements vscode.HoverProvider {
     position: vscode.Position,
     token: vscode.CancellationToken
   ): vscode.ProviderResult<vscode.Hover> {
-    const i18nKey:string = this.getI18nkey(document,position);
-    const i18nValues:Array<string> = this.getI18nValue(i18nKey);
-    const text:string = this.render(i18nValues);
-    const contents:vscode.MarkdownString = new vscode.MarkdownString(text);
+    const i18nKey: string = this.getI18nkey(document, position);
+    // const text: string = this.render(i18nKey);
+    const text: string ="test";
+    const contents: vscode.MarkdownString = new vscode.MarkdownString(text);
     return new vscode.Hover(contents);
   }
-  getI18nkey(document:vscode.TextDocument,position:vscode.Position):string{
-    console.log(document.getText());
-    const range:vscode.Range|undefined = document.getWordRangeAtPosition(position,/\$t\([^\)]+\)/ig);
-    if(!range){
-      return '';
+  getI18nkey(document: vscode.TextDocument, position: vscode.Position): string {
+    const range: vscode.Range | undefined = document.getWordRangeAtPosition(
+      position,
+      /\$t\([^\)]+\)/gi
+    );
+    if (!range) {
+      return "";
     }
-    const text:string = document.getText(range);
-    return text.replace(/\$t|\(|\)/ig,'');
+    const text: string = document.getText(range);
+    return text.replace(/\$t|\(|\)|'/gi, "");
   }
-  getI18nValue(i18nKey:string):Array<string>{
-    return [];
+  render(i18nKey: string): string {
+    const data = Common.getData();
+    const html:Array<string> = [];
+    Object.keys(data).map((key:string)=>{
+      html.push(data[key][i18nKey]);
+    });
+    return html.join("\n");
   }
-  render(i18nValue:Array<string>):string{
-    return '**render**';
+  formatter(key: string, value: string): string {
+    return `**${key}**: ${value}`;
   }
 }
 
