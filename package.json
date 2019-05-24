@@ -11,7 +11,9 @@
 		"Other"
 	],
 	"activationEvents": [
-		"onCommand:extension.config"
+		"onLanguage:vue",
+		"onLanguage:javascript",
+		"onLanguage:typescript"
 	],
 	"keywords": [
 		"vue",
