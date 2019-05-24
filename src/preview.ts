@@ -1,5 +1,5 @@
 import * as vscode from "vscode";
-import {Common} from "./common";
+import { Common } from "./common";
 
 class Preview implements vscode.HoverProvider {
   public provideHover(
@@ -8,11 +8,14 @@ class Preview implements vscode.HoverProvider {
     token: vscode.CancellationToken
   ): vscode.ProviderResult<vscode.Hover> {
 
-    if(!Common.validConfigDirectory()){
-     Common.doPromptConfigLocale();
+    const i18nKey: string = this.getI18nkey(document, position);
+    if (!i18nKey) {
+      return undefined;
+    }
+    if (!Common.validConfigDirectory()) {
+      Common.doPromptConfigLocale();
     }
 
-    const i18nKey: string = this.getI18nkey(document, position);
     const text: string = this.render(i18nKey);
     const contents: vscode.MarkdownString = new vscode.MarkdownString(text);
     return new vscode.Hover(contents);

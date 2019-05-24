@@ -17,7 +17,7 @@ class Extracted implements vscode.CodeActionProvider {
   ) {
     const text: string = document.getText(range);
     if (!text) {
-      return []
+      return [];
     }
     let { base } = path.parse(document.fileName);
     base = base.replace(document.languageId, 'json');
