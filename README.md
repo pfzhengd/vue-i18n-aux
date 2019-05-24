@@ -34,3 +34,6 @@ https://github.com/flyer-ui/vue-i18n-manage
 
 ### 未来计划
 https://github.com/flyer-ui/vue-i18n-manage/projects/1
+
+### VS Code 版本要求
+"vscode": "^1.33.0"
