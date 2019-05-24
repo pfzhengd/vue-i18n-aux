@@ -41,7 +41,7 @@ export class Common {
    * @returns {string}
    * @memberof Common
    */
-  static readFileContent(absolutePath: string) {
+  static readFileContent(absolutePath: string):object {
     try {
       const content = fs.readFileSync(absolutePath, { encoding: "utf-8" });
       return JSON.parse(content);
