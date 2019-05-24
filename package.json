@@ -21,7 +21,7 @@
 		"vue-i18n-manage",
 		"i18n manage"
 	],
-	"icon": " ",
+	"icon": "imgs/logo.png",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/flyer-ui/vue-i18n-manage.git"
@@ -34,8 +34,8 @@
 				"command": "extension.config",
 				"title": "Configure the path to the data source.",
 				"icon": {
-					"light": "./src/imgs/logo.png",
-					"dark": "./src/imgs/logo.png"
+					"light": "imgs/logo.svg",
+					"dark": "imgs/logo.svg"
 				}
 			}
 		],

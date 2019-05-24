@@ -3,7 +3,7 @@
 
 ### 安装方法
 1、在线安装：在VS Code开发工具的插件库中搜索vue-i18n-manage，找到后选择直接安装。  
-2、离线安装：  
+2、离线安装：https://marketplace.visualstudio.com/items?itemName=vue-i18n-manage.vue-i18n-manage 访问到页面后点击download extension.
 
 ### 包含的功能
 1、国际化预览  
