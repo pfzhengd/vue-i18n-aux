@@ -3,7 +3,7 @@
 	"displayName": "vue-i18n-manage",
 	"description": "A plguin based on vscode that is targeted for international file management.",
 	"publisher": "vue-i18n-manage",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"engines": {
 		"vscode": "^1.33.0"
 	},
