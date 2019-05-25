@@ -41,7 +41,7 @@ export class Common {
    * @returns {string}
    * @memberof Common
    */
-  static readFileContent(absolutePath: string):object {
+  static readFileContent(absolutePath: string): object {
     try {
       const content = fs.readFileSync(absolutePath, { encoding: "utf-8" });
       return JSON.parse(content);
@@ -166,13 +166,36 @@ export class Common {
     const result:
       | string
       | undefined = await vscode.window.showInformationMessage(
-      `${
+        `${
         this.key
-      }:Did not find your locale directory,please configure it first.`,
-      okText
-    );
-    if(okText === result){
+        }:Did not find your locale directory,please configure it first.`,
+        okText
+      );
+    if (okText === result) {
       this.doConfigLocaleDirectory();
+    }
+  }
+  
+  /**
+     * Determine if vue-i18n is included in the project,
+     * otherwise the vue-i18n-manage plugin will not be activated.
+     *
+     * @static
+     * @returns {Boolean}
+     * @memberof Common
+     */
+  static isHasVueI18n(): Boolean {
+    const folders = vscode.workspace.workspaceFolders;
+    if (folders && folders.length > 0) {
+      const projectUri = folders[0].uri.fsPath;
+      try {
+        const { dependencies, devDependencies } = require(path.resolve(projectUri, 'package.json'));
+        return dependencies["vue-i18n"] || devDependencies['vue-i18n'];
+      } catch (ex) {
+        return false;
+      }
+    } else {
+      return false;
     }
   }
 }
