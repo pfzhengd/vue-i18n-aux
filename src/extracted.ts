@@ -58,6 +58,13 @@ class Extracted implements vscode.CodeActionProvider {
 function replaceContent(key: string | undefined, range: vscode.Range, type: I18nType): void {
   (vscode.window.activeTextEditor as vscode.TextEditor).edit(editBuilder => {
     const value = I18nType.$t === type ? `{{$t("${key}")}}` : `this.$t("${key}")`;
+    if (type === I18nType.i18n) {
+      range = range.with(
+        range.start.with(range.start.line,
+          range.start.character - 1),
+        range.end.with(range.end.line, range.end.character + 1)
+      );
+    }
     editBuilder.replace(range, value);
   });
 }
@@ -78,7 +85,7 @@ function writeContent(fileName: string, key: string, value: string): void {
 
 async function converter({ fileName, text, range, type, reference }): Promise<void> {
   if (reference) {
-    replaceContent(reference.key,range,type);
+    replaceContent(reference.key, range, type);
   } else {
     let key: string | undefined = undefined;
     key = await vscode.window.showInputBox({
