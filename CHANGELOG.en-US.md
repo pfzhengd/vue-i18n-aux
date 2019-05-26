@@ -1,5 +1,9 @@
 # Change Log
 
+### v0.2.0
+release:
+1. The plugin only activates projects that have vue-i18n dependencies installed.
+2. When the extracted text is converted to a key, it will first detect whether the text already exists.
 
 ### v0.1.1
 Fixed：  

@@ -2,6 +2,7 @@ import * as vscode from "vscode";
 import * as fs from "fs";
 import * as merge from "deepmerge";
 import * as path from "path";
+import { option } from "./type/option";
 
 export class Common {
   static key: string = "vue-i18n-manage";
@@ -166,13 +167,84 @@ export class Common {
     const result:
       | string
       | undefined = await vscode.window.showInformationMessage(
-      `${
+        `${
         this.key
-      }:Did not find your locale directory,please configure it first.`,
-      okText
-    );
+        }:Did not find your locale directory,please configure it first.`,
+        okText
+      );
     if (okText === result) {
       this.doConfigLocaleDirectory();
     }
+  }
+
+  /**
+   * Determine if vue-i18n is included in the project,
+   * otherwise the vue-i18n-manage plugin will not be activated.
+   *
+   * @static
+   * @returns {Boolean}
+   * @memberof Common
+   */
+  static hasVueI18n(): boolean {
+    const folders = vscode.workspace.workspaceFolders;
+    if (folders && folders.length > 0) {
+      const projectUri = folders[0].uri.fsPath;
+      try {
+        const { dependencies, devDependencies } = require(path.resolve(
+          projectUri,
+          "package.json"
+        ));
+        return dependencies["vue-i18n"] || devDependencies["vue-i18n"];
+      } catch (ex) {
+        return false;
+      }
+    } else {
+      return false;
+    }
+  }
+
+  /**
+   * Determine whether the parameters of the text 
+   * already exists in the international source.
+   *
+   * @static
+   * @param {string} text
+   * @returns {boolean}
+   * @memberof Common
+   */
+  static hasText(text: string): boolean {
+    const data: object = this.getData();
+    const values: Array<string | number | symbol> = Object.values(data);
+    return values.hasOwnProperty(text);
+  }
+
+  /**
+   * Determine whether the parameters of the text 
+   * already exists in the international source.
+   * @static
+   * @param {string} text
+   * @returns {(object | null)}
+   * @memberof Common
+   */
+  static findSourceByText(text: string): option | null {
+    text = text.trim();
+    const data: object = this.getData();
+    const primaryLanguage:string = vscode.workspace.getConfiguration(this.key).get('primaryLanguage')||"";
+    if(!primaryLanguage){
+      vscode.window.showErrorMessage(`
+      Found primaryLanguage value is not set, this will lead to the same text extraction function failure.
+      `);
+    }
+    const key: string | undefined = Object.keys(data[primaryLanguage]).find(key => {
+      return data[primaryLanguage][key] === text;
+    });
+    
+    if (key) {
+      return {
+        key: key,
+        value: text
+      };
+    }
+    return null;
   }
 }

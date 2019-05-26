@@ -4,13 +4,12 @@ import { Common } from "./common";
 class Preview implements vscode.HoverProvider {
   public provideHover(
     document: vscode.TextDocument,
-    position: vscode.Position,
-    token: vscode.CancellationToken
+    position: vscode.Position
   ): vscode.ProviderResult<vscode.Hover> {
 
     const i18nKey: string = this.getI18nkey(document, position);
     if (!i18nKey) {
-      return undefined;
+      return new vscode.Hover('');
     }
     if (!Common.validConfigDirectory()) {
       Common.doPromptConfigLocale();

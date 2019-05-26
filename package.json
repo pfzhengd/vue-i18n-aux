@@ -11,9 +11,7 @@
 		"Other"
 	],
 	"activationEvents": [
-		"onLanguage:vue",
-		"onLanguage:javascript",
-		"onLanguage:typescript"
+		"onCommand:extension.config"
 	],
 	"keywords": [
 		"vue",
@@ -58,6 +56,11 @@
 					"type": "string",
 					"default": "",
 					"description": "Path to recording the data source."
+				},
+				"vue-i18n-manage.primaryLanguage": {
+					"type": "string",
+					"default": "zh-CN",
+					"description": "Configure the current primary language, which will be used by the development environment to determine if the same text exists in the internationalized data source for that language."
 				}
 			}
 		}
