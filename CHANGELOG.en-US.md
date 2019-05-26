@@ -1,5 +1,8 @@
 # Change Log
 
+## v0.2.1
+1. Optimize the wrong format of the content in the readme file.
+
 ## v0.2.0
 release:
 1. The plugin only activates projects that have vue-i18n dependencies installed.
