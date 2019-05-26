@@ -7,7 +7,8 @@
 
 ### 包含的功能
 1、国际化预览  
-2、提取选中的文本生成key值  
+2、提取选中的文本生成key值
+3、选中的文本如果已经国际化，则直接生成key值。  
 
 ### 功能预览
 ![src/static/vue-i18n-manage.gif](src/static/vue-i18n-manage.gif)
