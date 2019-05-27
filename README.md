@@ -26,7 +26,16 @@ locale                //本地化目录
       ...
     index.js          //一般用于存放添加到Vue实例时，所需要的代码
 ```
+### 关于配置  
+```
+  //可在VS Code设置中直接配置i18n文件源的地址
+  "vue-i18n-manage.path": "",       
 
+  //可在VS Code设置中直接配置当前主要语言，开发环境将使用该语言来
+  //确定该语言的国际化数据源是否存相同的文本，默认值是zh-CN
+  "vue-i18n-manage.primaryLanguage": "zh-CN"      
+```
+  
 ### 在线提问/建议   
 https://github.com/flyer-ui/vue-i18n-manage/issues
 

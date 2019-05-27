@@ -1,6 +1,11 @@
 # Change Log
 
+## v0.2.2
+fixed:
+1. If the value of primaryLanguage in the configuration file is set incorrectly, the small light bulb will not be displayed.
+
 ## v0.2.1
+fixed:
 1. Optimize the wrong format of the content in the readme file.
 
 ## v0.2.0

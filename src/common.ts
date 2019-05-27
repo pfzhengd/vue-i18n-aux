@@ -235,7 +235,12 @@ export class Common {
       Found primaryLanguage value is not set, this will lead to the same text extraction function failure.
       `);
     }
-    const key: string | undefined = Object.keys(data[primaryLanguage]).find(key => {
+    if(typeof data[primaryLanguage] === 'undefined'){
+      vscode.window.showWarningMessage(`
+      The internationalization directory for PrimaryLanguage in the configuration file was not found.
+      `);
+    }
+    const key: string | undefined = Object.keys(data[primaryLanguage]||{}).find(key => {
       return data[primaryLanguage][key] === text;
     });
     
