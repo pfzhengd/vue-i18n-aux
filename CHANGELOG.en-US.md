@@ -1,5 +1,9 @@
 # Change Log
 
+## v0.2.3
+fixed：
+1. Restore the logo style of v0.2.1.
+
 ## v0.2.2
 fixed:
 1. If the value of primaryLanguage in the configuration file is set incorrectly, the small light bulb will not be displayed.
