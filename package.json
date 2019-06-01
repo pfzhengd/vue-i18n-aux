@@ -83,6 +83,7 @@
 		"@types/mocha": "^2.2.42"
 	},
 	"dependencies": {
-		"deepmerge": "^3.2.0"
+		"deepmerge": "^3.2.0",
+		"small-linked-list": "0.0.3"
 	}
 }
