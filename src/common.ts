@@ -3,6 +3,7 @@ import * as fs from "fs";
 import * as merge from "deepmerge";
 import * as path from "path";
 import { option } from "./type/option";
+import Compiler from "./compiler";
 
 export class Common {
   static key: string = "vue-i18n-manage";
@@ -241,7 +242,11 @@ export class Common {
       `);
     }
     const key: string | undefined = Object.keys(data[primaryLanguage]||{}).find(key => {
-      return data[primaryLanguage][key] === text;
+      // return data[primaryLanguage][key] === text;
+      const compiler = new Compiler();
+      const source = data[primaryLanguage];
+      const value = compiler.toText(key,source);
+      return value === text;
     });
     
     if (key) {

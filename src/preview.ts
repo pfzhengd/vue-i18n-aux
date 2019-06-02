@@ -1,5 +1,6 @@
 import * as vscode from "vscode";
 import { Common } from "./common";
+import Compiler from "./compiler";
 
 class Preview implements vscode.HoverProvider {
   public provideHover(
@@ -35,10 +36,14 @@ class Preview implements vscode.HoverProvider {
   render(i18nKey: string): string {
     const data = Common.getData();
     const html: Array<string> = [];
-    Object.keys(data).map((key: string) => {
-      const value = data[key][i18nKey];
+
+    Object.keys(data).map((langType: string) => {
+      // const value = data[key][i18nKey];
+      const compiler = new Compiler();
+      const source = data[langType];
+      const value = compiler.toText(i18nKey,source);
       if (value) {
-        html.push(this.formatter(key, value));
+        html.push(this.formatter(langType, value));
       }
     });
     return html.join("\n\n");

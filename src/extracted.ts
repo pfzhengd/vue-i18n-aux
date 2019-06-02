@@ -3,6 +3,8 @@ import * as path from "path";
 import { Common } from "./common";
 import * as fs from 'fs';
 import { option } from "./type/option";
+import Compiler from './compiler';
+import * as merge from "deepmerge";
 
 const enum I18nType {
   $t,
@@ -78,8 +80,11 @@ function writeContent(fileName: string, key: string, value: string): void {
     if (fs.existsSync(absolutePath)) {
       data = Common.readFileContent(absolutePath);
     }
-    data[key] = value;
-    fs.writeFileSync(absolutePath, JSON.stringify(data), { encoding: 'utf-8' });
+    // data[key] = value;
+    const compiler = new Compiler();
+    const obj:object = compiler.toObject(key,value);
+    const mergeData:object = merge(data,obj);
+    fs.writeFileSync(absolutePath, JSON.stringify(mergeData), { encoding: 'utf-8' });
   });
 }
 
