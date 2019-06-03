@@ -4,6 +4,9 @@ import * as merge from "deepmerge";
 import * as path from "path";
 import { option } from "./type/option";
 import Compiler from "./compiler";
+import { stringify } from "querystring";
+import { resolveTxt } from "dns";
+import { result } from "./type/result";
 
 export class Common {
   static key: string = "vue-i18n-manage";
@@ -16,8 +19,12 @@ export class Common {
    * @returns
    * @memberof Common
    */
-  static isUndefined(obj: any): Boolean {
+  static isUndefined(obj: any): boolean {
     return typeof obj === "undefined";
+  }
+
+  static isPlainObject(obj: any): boolean {
+    return Object.prototype.toString.call(obj) === "[object Object]";
   }
 
   /**
@@ -168,11 +175,11 @@ export class Common {
     const result:
       | string
       | undefined = await vscode.window.showInformationMessage(
-        `${
+      `${
         this.key
-        }:Did not find your locale directory,please configure it first.`,
-        okText
-      );
+      }:Did not find your locale directory,please configure it first.`,
+      okText
+    );
     if (okText === result) {
       this.doConfigLocaleDirectory();
     }
@@ -205,7 +212,7 @@ export class Common {
   }
 
   /**
-   * Determine whether the parameters of the text 
+   * Determine whether the parameters of the text
    * already exists in the international source.
    *
    * @static
@@ -220,7 +227,7 @@ export class Common {
   }
 
   /**
-   * Determine whether the parameters of the text 
+   * Determine whether the parameters of the text
    * already exists in the international source.
    * @static
    * @param {string} text
@@ -230,31 +237,59 @@ export class Common {
   static findSourceByText(text: string): option | null {
     text = text.trim();
     const data: object = this.getData();
-    const primaryLanguage:string = vscode.workspace.getConfiguration(this.key).get('primaryLanguage')||"";
-    if(!primaryLanguage){
+    const primaryLanguage: string =
+      vscode.workspace.getConfiguration(this.key).get("primaryLanguage") || "";
+    if (!primaryLanguage) {
       vscode.window.showErrorMessage(`
       Found primaryLanguage value is not set, this will lead to the same text extraction function failure.
       `);
     }
-    if(typeof data[primaryLanguage] === 'undefined'){
+    if (typeof data[primaryLanguage] === "undefined") {
       vscode.window.showWarningMessage(`
       The internationalization directory for PrimaryLanguage in the configuration file was not found.
       `);
     }
-    const key: string | undefined = Object.keys(data[primaryLanguage]||{}).find(key => {
+    const result: result = {
+      end: false,
+      key: "",
+      value: ""
+    };
+    const key: string | undefined = Object.keys(
+      data[primaryLanguage] || {}
+    ).find(key => {
       // return data[primaryLanguage][key] === text;
-      const compiler = new Compiler();
-      const source = data[primaryLanguage];
-      const value = compiler.toText(key,source);
-      return value === text;
+      this.deepFind(data[primaryLanguage][key], text, result);
+      if(result.end){
+        result.key = key + result.key;
+      }
+      return result.value.length > 0;
     });
-    
+
     if (key) {
       return {
-        key: key,
-        value: text
+        key: result.key,
+        value: result.value
       };
     }
     return null;
+  }
+
+  static deepFind(target: object | string, text: string, result: result) {
+    if (target === text) {
+      result.end = true;
+      result.value = target;
+    }
+    if (this.isPlainObject(target) && !result.end) {
+      Object.keys(target).map(partKey => {
+        if (!result.end) {
+          result.key += "." + partKey;
+        }
+
+        this.deepFind(target[partKey], text, result);
+      });
+    }
+    if(!result.end){
+      result.key='';
+    }
   }
 }

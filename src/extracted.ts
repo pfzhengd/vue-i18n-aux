@@ -1,9 +1,9 @@
 import * as vscode from "vscode";
 import * as path from "path";
 import { Common } from "./common";
-import * as fs from 'fs';
+import * as fs from "fs";
 import { option } from "./type/option";
-import Compiler from './compiler';
+import Compiler from "./compiler";
 import * as merge from "deepmerge";
 
 const enum I18nType {
@@ -21,13 +21,15 @@ class Extracted implements vscode.CodeActionProvider {
       return [];
     }
     let { base } = path.parse(document.fileName);
-    base = base.replace(document.languageId, 'json');
+    base = base.replace(document.languageId, "json");
     const hasText: option | null = Common.findSourceByText(text);
 
     let args = [
       {
         command: "extension.converter",
-        title: hasText ? `Reference [${hasText.key}] as $t` : "Extracted the text as $t",
+        title: hasText
+          ? `Reference [${hasText.key}] as $t`
+          : "Extracted the text as $t",
         arguments: [
           {
             fileName: base,
@@ -40,7 +42,9 @@ class Extracted implements vscode.CodeActionProvider {
       },
       {
         command: "extension.converter",
-        title: hasText ? `Reference [${hasText.key}] as i18n.t` : "Extracted the text as i18n.t",
+        title: hasText
+          ? `Reference [${hasText.key}] as i18n.t`
+          : "Extracted the text as i18n.t",
         arguments: [
           {
             fileName: base,
@@ -56,14 +60,17 @@ class Extracted implements vscode.CodeActionProvider {
   }
 }
 
-
-function replaceContent(key: string | undefined, range: vscode.Range, type: I18nType): void {
+function replaceContent(
+  key: string | undefined,
+  range: vscode.Range,
+  type: I18nType
+): void {
   (vscode.window.activeTextEditor as vscode.TextEditor).edit(editBuilder => {
-    const value = I18nType.$t === type ? `{{$t("${key}")}}` : `this.$t("${key}")`;
+    const value =
+      I18nType.$t === type ? `{{$t("${key}")}}` : `this.$t("${key}")`;
     if (type === I18nType.i18n) {
       range = range.with(
-        range.start.with(range.start.line,
-          range.start.character - 1),
+        range.start.with(range.start.line, range.start.character - 1),
         range.end.with(range.end.line, range.end.character + 1)
       );
     }
@@ -82,13 +89,21 @@ function writeContent(fileName: string, key: string, value: string): void {
     }
     // data[key] = value;
     const compiler = new Compiler();
-    const obj:object = compiler.toObject(key,value);
-    const mergeData:object = merge(data,obj);
-    fs.writeFileSync(absolutePath, JSON.stringify(mergeData), { encoding: 'utf-8' });
+    const obj: object = compiler.toObject(key, value);
+    const mergeData: object = merge(data, obj);
+    fs.writeFileSync(absolutePath, JSON.stringify(mergeData), {
+      encoding: "utf-8"
+    });
   });
 }
 
-async function converter({ fileName, text, range, type, reference }): Promise<void> {
+async function converter({
+  fileName,
+  text,
+  range,
+  type,
+  reference
+}): Promise<void> {
   if (reference) {
     replaceContent(reference.key, range, type);
   } else {
@@ -97,8 +112,35 @@ async function converter({ fileName, text, range, type, reference }): Promise<vo
       placeHolder: "Enter the key to be converted,for example:lang.demo.key"
     });
     if (key) {
-      replaceContent(key, range, type);
-      writeContent(fileName, key, text);
+      const data = Common.getData();
+      let hasKey: boolean = false;
+      Object.keys(data).map((langType: string) => {
+        // const value = data[key][i18nKey];
+        const compiler = new Compiler();
+        const source = data[langType];
+        const value = compiler.toText(String(key), source);
+        if (value) {
+          hasKey = true;
+          return;
+        }
+      });
+      if (hasKey) {
+        const yes = "确定";
+        const receiveText = await vscode.window.showWarningMessage(
+          `当前设置的${key}已经存在，可以尝试修改，如需覆盖点击确定`,
+          {
+            modal: true
+          },
+          yes
+        );
+        if (String(receiveText) === yes) {
+          hasKey = false;
+        }
+      }
+      if(!hasKey){
+        replaceContent(key, range, type);
+        writeContent(fileName, key, text);
+      }
     }
   }
 }
