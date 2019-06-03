@@ -1,5 +1,5 @@
 export declare class result{
   end:boolean
-  key:string
+  key:Array<string>
   value:string
 }

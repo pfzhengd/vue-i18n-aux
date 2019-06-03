@@ -12,6 +12,8 @@
 
 ### 功能预览
 ![src/static/vue-i18n-manage.gif](src/static/vue-i18n-manage.gif)
+**v0.3.0版本更新**  
+![src/static/vue-i18n-manage.minor.gif](src/static/vue-i18n-manage.minor.gif)
 
 ### 使用说明
 1、国际化文件目录结构规格  

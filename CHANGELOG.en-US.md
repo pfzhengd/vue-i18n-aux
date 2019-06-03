@@ -1,5 +1,10 @@
 # Change Log
 
+## v0.3.0  
+release:  
+1. If the configured internationalized key value already exists, you will be prompted to confirm the override before replacing the text.
+2. If the internationalized key has a . sign split, it will be parsed into the corresponding level data object.
+
 ## v0.2.3
 fixed：
 1. Restore the logo style of v0.2.1.

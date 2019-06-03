@@ -251,45 +251,46 @@ export class Common {
     }
     const result: result = {
       end: false,
-      key: "",
+      key: [],
       value: ""
     };
     const key: string | undefined = Object.keys(
       data[primaryLanguage] || {}
     ).find(key => {
       // return data[primaryLanguage][key] === text;
-      this.deepFind(data[primaryLanguage][key], text, result);
-      if(result.end){
-        result.key = key + result.key;
+      this.deepFind(data[primaryLanguage][key],key, text, result);
+      if(!result.end){
+        result.key = []
       }
+
       return result.value.length > 0;
     });
 
     if (key) {
       return {
-        key: result.key,
+        key: result.key.join('.'),
         value: result.value
       };
     }
     return null;
   }
 
-  static deepFind(target: object | string, text: string, result: result) {
+  static deepFind(target: object | string,key:string, text: string, result: result) {
+    result.key.push(key);
     if (target === text) {
       result.end = true;
       result.value = target;
     }
     if (this.isPlainObject(target) && !result.end) {
       Object.keys(target).map(partKey => {
-        if (!result.end) {
-          result.key += "." + partKey;
-        }
-
-        this.deepFind(target[partKey], text, result);
+        this.deepFind(target[partKey],partKey, text, result);
       });
-    }
-    if(!result.end){
-      result.key='';
+    }else{
+      if(result.end && result.value === target){
+       
+      }else{
+        result.key.pop();
+      }
     }
   }
 }
