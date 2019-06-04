@@ -1,35 +1,40 @@
 # Change Log
 
-## v0.3.0  
-发布功能：  
-1. 如果配置的国际化key值已经存在，替换文本之前会先进行提示是否确认覆盖。
-2. 如果国际化的key中带有.号分割，则会解析成对应层级的数据对象
+## v0.3.1
+fixed:
+1. Updated the README.md file.
+2. Fix a bug where the icon on the toolbar is too small.
 
-## v0.2.3  
-修复：
-1. 还原v0.2.1版本的logo样式
+## v0.3.0  
+release:  
+1. If the configured internationalized key value already exists, you will be prompted to confirm the override before replacing the text.
+2. If the internationalized key has a . sign split, it will be parsed into the corresponding level data object.
+
+## v0.2.3
+fixed：
+1. Restore the logo style of v0.2.1.
 
 ## v0.2.2
-修复：
-1. 如果配置文件中的primaryLanguage的值设置不正确，小灯泡会不显示出来。
+fixed:
+1. If the value of primaryLanguage in the configuration file is set incorrectly, the small light bulb will not be displayed.
 
 ## v0.2.1
-修复：
-1. 优化readme文件中内容的错误格式。
+fixed:
+1. Optimize the wrong format of the content in the readme file.
 
 ## v0.2.0
-发布功能：
-1. 插件只对安装有vue-i18n依赖的项目进行激活。
-2. 提取文本转换成key时会先检测是否之前已经存在这个文本。
+release:
+1. The plugin only activates projects that have vue-i18n dependencies installed.
+2. When the extracted text is converted to a key, it will first detect whether the text already exists.
 
-修复：
-1. 使用i18n转换时，没有去掉字符串的引号。
+fixed:
+1. When using i18n conversion,the quotes of the string are not removed.
 
 ## v0.1.1
-修复：
-1. 安装后需要手动激活使用的bug
+Fixed：  
+1. A bug that needs to be manually activated after installing the plugin.
 
-## v0.1.0
-发布功能：
-1. 国际化预览  
-2. 提取选择后的文本，生成国际化key  
+## v0.1.0  
+Release:  
+1. i18n preview.   
+2. extract the selected text,gnerate an i18n key.
