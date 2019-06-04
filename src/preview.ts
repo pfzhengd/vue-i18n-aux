@@ -38,7 +38,6 @@ class Preview implements vscode.HoverProvider {
     const html: Array<string> = [];
 
     Object.keys(data).map((langType: string) => {
-      // const value = data[key][i18nKey];
       const compiler = new Compiler();
       const source = data[langType];
       const value = compiler.toText(i18nKey,source);

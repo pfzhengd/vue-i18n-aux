@@ -87,7 +87,6 @@ function writeContent(fileName: string, key: string, value: string): void {
     if (fs.existsSync(absolutePath)) {
       data = Common.readFileContent(absolutePath);
     }
-    // data[key] = value;
     const compiler = new Compiler();
     const obj: object = compiler.toObject(key, value);
     const mergeData: object = merge(data, obj);
@@ -115,7 +114,6 @@ async function converter({
       const data = Common.getData();
       let hasKey: boolean = false;
       Object.keys(data).map((langType: string) => {
-        // const value = data[key][i18nKey];
         const compiler = new Compiler();
         const source = data[langType];
         const value = compiler.toText(String(key), source);
@@ -125,9 +123,9 @@ async function converter({
         }
       });
       if (hasKey) {
-        const yes = "确定";
+        const yes = "OK";
         const receiveText = await vscode.window.showWarningMessage(
-          `当前设置的${key}已经存在，可以尝试修改，如需覆盖点击确定`,
+          `The currently set ${key} already exists, you can try to modify it, if you need to override click OK.`,
           {
             modal: true
           },
