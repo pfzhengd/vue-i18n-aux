@@ -1,5 +1,13 @@
-## Vue-i18n-manage
-一款方便国际化文件管理的VS Code插件。
+<p align='center'>
+  <img src='imgs/logo.png' alt='logo' width='160'/> 
+</p>
+
+## Vue i18n manage
+一款方便国际化文件管理的VS Code插件。  
+
+![Visual Studio Marketplace Version](https://img.shields.io/visual-studio-marketplace/v/vue-i18n-manage.vue-i18n-manage.svg?style=flat-square)
+![Visual Studio Marketplace Installs](https://img.shields.io/visual-studio-marketplace/i/vue-i18n-manage.vue-i18n-manage.svg?style=flat-square)
+![Visual Studio Marketplace Downloads](https://img.shields.io/visual-studio-marketplace/d/vue-i18n-manage.vue-i18n-manage.svg?style=flat-square)  
 
 ### 安装方法
 1、在线安装：在VS Code开发工具的插件库中搜索vue-i18n-manage，找到后选择直接安装。  
