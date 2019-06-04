@@ -1,5 +1,5 @@
 <p align='center'>
-  <img src='imgs/logo.png' alt='logo' width='160'/> 
+  <img src='https://raw.githubusercontent.com/flyer-ui/vue-i18n-manage/master/imgs/logo.png' alt='logo' width='160'/> 
 </p>
 
 ## Vue i18n manage
