@@ -28,15 +28,14 @@ A VS Code plugin for international file management.
 
 ## Directory structure
 ```
-locale                //Localized directory
-  i18n                //Ii8n file source
-    en-US             //English
-      demo.json       
-      ...
-    zh-CN             //Chinese
-      demo.json       
-      ...
-    index.js          //Generally used to store the code needed to add to the Vue instance
+locale                //Localized directory               
+├── en-US             //English
+|   ├── demo.json       
+|   ├── ...
+├── zh-CN             //Chinese
+|   ├── demo.json       
+|   ├──  ...
+|   index.js          //Generally used to store the code needed to add to the Vue instance
 ```
 ## About configuration  
 ```

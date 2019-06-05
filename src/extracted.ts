@@ -5,6 +5,8 @@ import * as fs from "fs";
 import { option } from "./type/option";
 import Compiler from "./compiler";
 import * as merge from "deepmerge";
+import { EnterKey } from "./type/enterKey";
+
 
 const enum I18nType {
   $t,
@@ -96,6 +98,18 @@ function writeContent(fileName: string, key: string, value: string): void {
   });
 }
 
+function parseKey(key: string): EnterKey|null {
+  const regKey = /(^[^:]+(?:\:))((?<=\:).+)/i;
+  const result: RegExpMatchArray | null = key.match(regKey);
+  if (result && result.length>2) {
+    return {
+      i18n: result[2],
+      fileName: result[1]
+    };
+  }
+  return null;
+}
+
 async function converter({
   fileName,
   text,
@@ -111,6 +125,11 @@ async function converter({
       placeHolder: "Enter the key to be converted,for example:lang.demo.key"
     });
     if (key) {
+      const enterKey:EnterKey|null = parseKey(key);
+      if(enterKey){
+        key = enterKey.i18n;
+        fileName = enterKey.fileName.replace(":",".json");
+      }
       const data = Common.getData();
       let hasKey: boolean = false;
       Object.keys(data).map((langType: string) => {
@@ -135,7 +154,7 @@ async function converter({
           hasKey = false;
         }
       }
-      if(!hasKey){
+      if (!hasKey) {
         replaceContent(key, range, type);
         writeContent(fileName, key, text);
       }
