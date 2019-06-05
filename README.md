@@ -35,7 +35,7 @@ locale                //Localized directory
 ├── zh-CN             //Chinese
 |   ├── demo.json       
 |   ├──  ...
-|   index.js          //Generally used to store the code needed to add to the Vue instance
+└── index.js          //Generally used to store the code needed to add to the Vue instance
 ```
 ## About configuration  
 ```
