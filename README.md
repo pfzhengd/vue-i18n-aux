@@ -59,4 +59,4 @@ https://github.com/flyer-ui/vue-i18n-manage/projects/1
 "vscode": "^1.33.0"
 
 ## License
-[MIT](https://github.com/flyer-ui/vue-i18n-manage/blob/master/LICENSE)  © 2019 [Flyer-UI](https://github.com/flyer-ui/flyer-ui)
+[MIT](https://github.com/flyer-ui/vue-i18n-manage/blob/master/LICENSE)  © 2019 [Zheng peng fei](https://github.com/flyer-ui/flyer-ui)
