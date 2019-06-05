@@ -1,6 +1,6 @@
 # Change Log
 
-## v0.4.0
+## v0.4.1
 发布功能：
 1. 支持命令为：文件名:国际化Key 的格式，例如：HelloWorld:lang.demo.key，其中HelloWorld为指定的文件名，lang.demo.key为国际化key的层级
 
