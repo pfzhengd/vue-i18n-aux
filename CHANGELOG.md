@@ -1,6 +1,6 @@
 # Change Log
 
-## v0.4.1
+## v0.4.2
 Release:
 1. The supported command format is: filename:Key, for example: HelloWorld:lang.demo.key, where HelloWorld is the specified file name and lang.demo.key is the i18n key.
 
