@@ -28,11 +28,11 @@ A VS Code plugin for international file management.
 
 ## Directory structure
 ```
-locale                //Localized directory               
-├── en-US             //English
+locale                              
+├── en-US             
 |   ├── demo.json       
 |   ├── ...
-├── zh-CN             //Chinese
+├── zh-CN             
 |   ├── demo.json       
 |   ├──  ...
 └── index.js          //Generally used to store the code needed to add to the Vue instance
@@ -45,18 +45,6 @@ locale                //Localized directory
   // Set the main language you are developing.
   "vue-i18n-manage.primaryLanguage": "zh-CN"      
 ```
-  
-## Online question / suggestion 
-https://github.com/flyer-ui/vue-i18n-manage/issues
-
-## Github  
-https://github.com/flyer-ui/vue-i18n-manage
-
-## Future plan
-https://github.com/flyer-ui/vue-i18n-manage/projects/1
-
-## VS Code Version
-"vscode": "^1.33.0"
 
 ## License
-[MIT](https://github.com/flyer-ui/vue-i18n-manage/blob/master/LICENSE)  © 2019 [Zheng peng fei](https://github.com/flyer-ui/flyer-ui)
+[MIT](https://github.com/flyer-ui/vue-i18n-manage/blob/master/LICENSE)  © 2019 [Zheng peng fei](https://github.com/pfzhengd)
