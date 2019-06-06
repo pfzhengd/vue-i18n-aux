@@ -3,9 +3,6 @@ import * as fs from "fs";
 import * as merge from "deepmerge";
 import * as path from "path";
 import { option } from "./type/option";
-import Compiler from "./compiler";
-import { stringify } from "querystring";
-import { resolveTxt } from "dns";
 import { result } from "./type/result";
 
 export class Common {
@@ -33,7 +30,7 @@ export class Common {
    * @static
    * @memberof Common
    */
-  static readDirectory(path: string | undefined): Array<string> {
+  static readdir(path: string | undefined): Array<string> {
     if (this.isUndefined(path)) {
       return [];
     }
@@ -50,7 +47,7 @@ export class Common {
    * @returns {string}
    * @memberof Common
    */
-  static readFileContent(absolutePath: string): object {
+  static readFile(absolutePath: string): object {
     try {
       const content = fs.readFileSync(absolutePath, { encoding: "utf-8" });
       return JSON.parse(content);
@@ -84,7 +81,7 @@ export class Common {
    */
   static getLanguageDirectoryName(): Array<string> {
     const configPath: string = this.getConfigPath() || "";
-    const dires: Array<string> = this.readDirectory(configPath);
+    const dires: Array<string> = this.readdir(configPath);
     const langNames: Array<string> = [];
     dires.map(dire => {
       const direPath: string = path.resolve(configPath, dire);
@@ -104,14 +101,14 @@ export class Common {
    * @returns {object}
    * @memberof Common
    */
-  static getLanguageContent(langName: string): object {
+  static getContent(langName: string): object {
     let data: object = {};
     const configPath: string = this.getConfigPath() || "";
     const direPath: string = path.resolve(configPath, langName);
-    const fiels: Array<string> = this.readDirectory(direPath);
+    const fiels: Array<string> = this.readdir(direPath);
     fiels.map(file => {
       const absolutePath: string = path.resolve(direPath, file);
-      data = merge(data, this.readFileContent(absolutePath));
+      data = merge(data, this.readFile(absolutePath));
     });
     return {
       [langName]: data
@@ -129,7 +126,7 @@ export class Common {
     let data: object = {};
     const direNames: Array<string> = this.getLanguageDirectoryName();
     direNames.map(direName => {
-      data = merge(data, this.getLanguageContent(direName));
+      data = merge(data, this.getContent(direName));
     });
     return data;
   }
@@ -141,7 +138,7 @@ export class Common {
    * @returns {boolean}
    * @memberof Common
    */
-  static validConfigDirectory(): boolean {
+  static validConfigPath(): boolean {
     const configPath: string = this.getConfigPath() || "";
     return fs.existsSync(configPath);
   }

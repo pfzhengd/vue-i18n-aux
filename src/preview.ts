@@ -12,7 +12,7 @@ class Preview implements vscode.HoverProvider {
     if (!i18nKey) {
       return new vscode.Hover('');
     }
-    if (!Common.validConfigDirectory()) {
+    if (!Common.validConfigPath()) {
       Common.doPromptConfigLocale();
     }
 

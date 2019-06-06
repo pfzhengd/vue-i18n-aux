@@ -1,4 +1,4 @@
-export declare class result{
+export declare interface result{
   end:boolean
   key:Array<string>
   value:string
