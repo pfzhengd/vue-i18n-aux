@@ -60,108 +60,108 @@ class Extracted implements vscode.CodeActionProvider {
     ];
     return args;
   }
+}
 
-  replace(key: string | undefined,
-    range: vscode.Range,
-    type: I18nType): void {
-    (vscode.window.activeTextEditor as vscode.TextEditor).edit(editBuilder => {
-      const value =
-        I18nType.$t === type ? `{{$t("${key}")}}` : `this.$t("${key}")`;
-      if (type === I18nType.i18n) {
-        range = range.with(
-          range.start.with(range.start.line, range.start.character - 1),
-          range.end.with(range.end.line, range.end.character + 1)
-        );
-      }
-      editBuilder.replace(range, value);
-    });
-  }
-
-  save(fileName: string, key: string, value: string): void {
-    const configPath: string = Common.getConfigPath() || "";
-    const direNames: Array<string> = Common.getLanguageDirectoryName();
-    direNames.map(direName => {
-      const absolutePath: string = path.resolve(configPath, direName, fileName);
-      let data: object = {};
-      if (fs.existsSync(absolutePath)) {
-        data = Common.readFile(absolutePath);
-      }
-      const compiler = new Compiler();
-      const obj: object = compiler.toObject(key, value);
-      const mergeData: object = merge(data, obj);
-      fs.writeFileSync(absolutePath, JSON.stringify(mergeData, null, 2), {
-        encoding: "utf-8",
-      });
-    });
-  }
-
-  parseKey(key: string): EnterKey | null {
-    const regKey = /(^[^:]+(?:\:))((?<=\:).+)/i;
-    const result: RegExpMatchArray | null = key.match(regKey);
-    if (result && result.length > 2) {
-      return {
-        i18n: result[2],
-        fileName: result[1]
-      };
+function replaceContent(key: string | undefined,
+  range: vscode.Range,
+  type: I18nType): void {
+  (vscode.window.activeTextEditor as vscode.TextEditor).edit(editBuilder => {
+    const value =
+      I18nType.$t === type ? `{{$t("${key}")}}` : `this.$t("${key}")`;
+    if (type === I18nType.i18n) {
+      range = range.with(
+        range.start.with(range.start.line, range.start.character - 1),
+        range.end.with(range.end.line, range.end.character + 1)
+      );
     }
-    return null;
-  }
+    editBuilder.replace(range, value);
+  });
+}
 
-  async convert({
-    fileName,
-    text,
-    range,
-    type,
-    reference
-  }): Promise<void> {
-    if (reference) {
-      this.replace(reference.key, range, type);
-    } else {
-      let key: string | undefined = undefined;
-      key = await vscode.window.showInputBox({
-        placeHolder: "Enter the key to be converted,for example:lang.demo.key"
+function writeContent(fileName: string, key: string, value: string): void {
+  const configPath: string = Common.getConfigPath() || "";
+  const direNames: Array<string> = Common.getLanguageName();
+  direNames.map(direName => {
+    const absolutePath: string = path.resolve(configPath, direName, fileName);
+    let data: object = {};
+    if (fs.existsSync(absolutePath)) {
+      data = Common.readFile(absolutePath);
+    }
+    const compiler = new Compiler();
+    const obj: object = compiler.toObject(key, value);
+    const mergeData: object = merge(data, obj);
+    fs.writeFileSync(absolutePath, JSON.stringify(mergeData, null, 2), {
+      encoding: "utf-8",
+    });
+  });
+}
+
+function parseKey(key: string): EnterKey | null {
+  const regKey = /(^[^:]+(?:\:))((?<=\:).+)/i;
+  const result: RegExpMatchArray | null = key.match(regKey);
+  if (result && result.length > 2) {
+    return {
+      i18n: result[2],
+      fileName: result[1]
+    };
+  }
+  return null;
+}
+
+async function convert({
+  fileName,
+  text,
+  range,
+  type,
+  reference
+}): Promise<void> {
+  if (reference) {
+    replaceContent(reference.key, range, type);
+  } else {
+    let key: string | undefined = undefined;
+    key = await vscode.window.showInputBox({
+      placeHolder: "Enter the key to be converted,for example:lang.demo.key"
+    });
+    if (key) {
+      const enterKey: EnterKey | null = parseKey(key);
+      if (enterKey) {
+        key = enterKey.i18n;
+        fileName = enterKey.fileName.replace(":", ".json");
+      }
+      const data = Common.getData();
+      let hasKey: boolean = false;
+      Object.keys(data).map((langType: string) => {
+        const compiler = new Compiler();
+        const source = data[langType];
+        const value = compiler.toText(String(key), source);
+        if (value) {
+          hasKey = true;
+          return;
+        }
       });
-      if (key) {
-        const enterKey: EnterKey | null = this.parseKey(key);
-        if (enterKey) {
-          key = enterKey.i18n;
-          fileName = enterKey.fileName.replace(":", ".json");
+      if (hasKey) {
+        const yes = "OK";
+        const receiveText = await vscode.window.showWarningMessage(
+          `The currently set ${key} already exists, you can try to modify it, if you need to override click OK.`,
+          {
+            modal: true
+          },
+          yes
+        );
+        if (String(receiveText) === yes) {
+          hasKey = false;
         }
-        const data = Common.getData();
-        let hasKey: boolean = false;
-        Object.keys(data).map((langType: string) => {
-          const compiler = new Compiler();
-          const source = data[langType];
-          const value = compiler.toText(String(key), source);
-          if (value) {
-            hasKey = true;
-            return;
-          }
-        });
-        if (hasKey) {
-          const yes = "OK";
-          const receiveText = await vscode.window.showWarningMessage(
-            `The currently set ${key} already exists, you can try to modify it, if you need to override click OK.`,
-            {
-              modal: true
-            },
-            yes
-          );
-          if (String(receiveText) === yes) {
-            hasKey = false;
-          }
-        }
-        if (!hasKey) {
-          this.replace(key, range, type);
-          this.save(fileName, key, text);
-        }
+      }
+      if (!hasKey) {
+        replaceContent(key, range, type);
+        writeContent(fileName, key, text);
       }
     }
   }
 }
 
 export default () => {
-  const extracted = new Extracted()
+  const extracted = new Extracted();
   return [
     vscode.languages.registerCodeActionsProvider(
       [
@@ -171,6 +171,6 @@ export default () => {
       ],
       extracted
     ),
-    vscode.commands.registerCommand("extension.converter", extracted.convert)
+    vscode.commands.registerCommand("extension.converter", convert)
   ];
 };

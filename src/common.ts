@@ -79,7 +79,7 @@ export class Common {
    * @returns {Array<string>}
    * @memberof Common
    */
-  static getLanguageDirectoryName(): Array<string> {
+  static getLanguageName(): Array<string> {
     const configPath: string = this.getConfigPath() || "";
     const dires: Array<string> = this.readdir(configPath);
     const langNames: Array<string> = [];
@@ -124,7 +124,7 @@ export class Common {
    */
   static getData() {
     let data: object = {};
-    const direNames: Array<string> = this.getLanguageDirectoryName();
+    const direNames: Array<string> = this.getLanguageName();
     direNames.map(direName => {
       data = merge(data, this.getContent(direName));
     });
@@ -172,11 +172,11 @@ export class Common {
     const result:
       | string
       | undefined = await vscode.window.showInformationMessage(
-      `${
+        `${
         this.key
-      }:Did not find your locale directory,please configure it first.`,
-      okText
-    );
+        }:Did not find your locale directory,please configure it first.`,
+        okText
+      );
     if (okText === result) {
       this.doConfigLocaleDirectory();
     }
@@ -254,12 +254,10 @@ export class Common {
     const key: string | undefined = Object.keys(
       data[primaryLanguage] || {}
     ).find(key => {
-      // return data[primaryLanguage][key] === text;
-      this.deepFind(data[primaryLanguage][key],key, text, result);
-      if(!result.end){
-        result.key = []
+      this.deepFind(data[primaryLanguage][key], key, text, result);
+      if (!result.end) {
+        result.key = [];
       }
-
       return result.value.length > 0;
     });
 
@@ -272,22 +270,21 @@ export class Common {
     return null;
   }
 
-  static deepFind(target: object | string,key:string, text: string, result: result) {
-    result.key.push(key);
+  static deepFind(target: object | string, key: string, text: string, result: result) {
+    if(!result.end){
+      result.key.push(key);
+    }
     if (target === text) {
       result.end = true;
       result.value = target;
     }
     if (this.isPlainObject(target) && !result.end) {
       Object.keys(target).map(partKey => {
-        this.deepFind(target[partKey],partKey, text, result);
+        this.deepFind(target[partKey], partKey, text, result);
+        if (!result.end) {
+          result.key.pop();
+        }
       });
-    }else{
-      if(result.end && result.value === target){
-       
-      }else{
-        result.key.pop();
-      }
     }
   }
 }
