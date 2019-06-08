@@ -41,15 +41,6 @@
 				}
 			}
 		],
-		"menus": {
-			"editor/title": [
-				{
-					"when": "editorFocus",
-					"command": "extension.config",
-					"group": "navigation"
-				}
-			]
-		},
 		"configuration": {
 			"type": "object",
 			"title": "vue-i18n-manage",

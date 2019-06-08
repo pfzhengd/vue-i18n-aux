@@ -1,5 +1,10 @@
 # Change Log
 
+## v0.4.2
+Fixed:
+1. Direct reference to the text of the same key, has a chance to emerge bug.
+2. The icon for configuring the text path in the menu bar in the upper right corner is removed.
+
 ## v0.4.1
 Release:
 1. The supported command format is: filename:Key, for example: HelloWorld:lang.demo.key, where HelloWorld is the specified file name and lang.demo.key is the i18n key.

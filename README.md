@@ -23,8 +23,6 @@ A VS Code plugin for international file management.
 
 ## Preview
 ![src/static/vue-i18n-manage.gif](src/static/vue-i18n-manage.gif)
-**v0.3.0 Version**  
-![src/static/vue-i18n-manage.minor.gif](src/static/vue-i18n-manage.minor.gif)
 
 ## Directory structure
 ```
@@ -37,6 +35,34 @@ locale
 |   ├──  ...
 └── index.js          //Generally used to store the code needed to add to the Vue instance
 ```
+## Example
+```JS
+const enDemo = require('./en-US/demo.json')
+const cnDemo = require('./zh-CN/demo.json')
+
+export default {
+  en: enDemo,
+  cn: cnDemo
+}
+
+import Vue from 'vue'
+import App from './App'
+import messages from './locale'
+import VueI18n from 'vue-i18n'
+
+const i18n = new VueI18n({
+  locale: 'cn',
+  messages: messages
+})
+
+window.instance = new Vue({
+  el: '#app',
+  i18n,
+  render: h => h(App)
+})
+
+```
+
 ## About configuration  
 ```
   // Set your internationalization file path.

@@ -1,8 +1,12 @@
 # Change Log
+## v0.4.2  
+修复：
+1. 直接引用相同文本的key，有几率出现bug的问题。
+2. 去掉了右上角菜单栏配置文本路径的图标。
 
 ## v0.4.1
 发布功能：
-1. 支持命令为：文件名:国际化Key 的格式，例如：HelloWorld:lang.demo.key，其中HelloWorld为指定的文件名，lang.demo.key为国际化key的层级
+1. 支持命令为：文件名:国际化Key 的格式，例如：HelloWorld:lang.demo.key，其中HelloWorld为指定的文件名，lang.demo.key为国际化key的层级。
 
 ## v0.3.1
 修复:
