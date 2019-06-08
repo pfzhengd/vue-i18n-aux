@@ -1,6 +1,6 @@
 # Change Log
 
-## v0.4.4
+## v0.4.5
 Fixed:
 1. Direct reference to the text of the same key, has a chance to emerge bug.
 2. The icon for configuring the text path in the menu bar in the upper right corner is removed.
