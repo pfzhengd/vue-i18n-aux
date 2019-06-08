@@ -4,7 +4,9 @@
 
 ## Vue i18n manage
 A VS Code plugin for international file management. 
-
+```
+I didn't do the automatic translation function because the translation feeling is not accurate, and the positioning of the plugin itself is lightweight.
+```
 ![Visual Studio Marketplace Version](https://img.shields.io/visual-studio-marketplace/v/vue-i18n-manage.vue-i18n-manage.svg?style=flat-square)
 ![Visual Studio Marketplace Installs](https://img.shields.io/visual-studio-marketplace/i/vue-i18n-manage.vue-i18n-manage.svg?style=flat-square)
 ![Visual Studio Marketplace Downloads](https://img.shields.io/visual-studio-marketplace/d/vue-i18n-manage.vue-i18n-manage.svg?style=flat-square)  
