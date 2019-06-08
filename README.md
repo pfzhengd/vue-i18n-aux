@@ -37,6 +37,8 @@ locale
 ```
 ## Example
 ```JS
+
+// index.js
 const enDemo = require('./en-US/demo.json')
 const cnDemo = require('./zh-CN/demo.json')
 
@@ -45,6 +47,7 @@ export default {
   cn: cnDemo
 }
 
+// main.js
 import Vue from 'vue'
 import App from './App'
 import messages from './locale'
