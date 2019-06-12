@@ -3,7 +3,7 @@
 	"displayName": "Vue i18n Manage",
 	"description": "A plguin based on vscode that is targeted for international file management.",
 	"publisher": "vue-i18n-manage",
-	"version": "0.4.5",
+	"version": "0.4.6",
 	"engines": {
 		"vscode": "^1.33.0"
 	},
@@ -30,7 +30,7 @@
 	},
 	"homepage": "https://github.com/flyer-ui/vue-i18n-manage",
 	"main": "./out/extension.js",
-	"preview":true,
+	"preview": true,
 	"contributes": {
 		"configuration": {
 			"type": "object",
@@ -46,7 +46,7 @@
 				}
 			}
 		},
-		"keybindings":[
+		"keybindings": [
 			{
 				"command": "extension.config",
 				"key": "ctrl+p"
