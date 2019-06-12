@@ -3,7 +3,7 @@ import { Common } from './common';
 
 export function activate(context:vscode.ExtensionContext){
   if(vscode.workspace.workspaceFolders && Common.hasVueI18n()){
-    vscode.window.showInformationMessage("vue-i18n-manage is activated.");
+    // vscode.window.showInformationMessage("vue-i18n-manage is activated.");
     [
       require('./preview').default,
       require('./config').default,

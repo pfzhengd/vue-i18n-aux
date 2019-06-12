@@ -1,5 +1,14 @@
 # Change Log
+## v0.4.6 (2019/06/12)
+发布功能：
+1. 插件激活时会自动匹配一次路径为locale的路径。
 
+优化:
+1. 未定义的中英文项，悬浮会提示undefined [#2](https://github.com/pfzhengd/vue-i18n-manage/issues/2)  
+2. 去掉了path配置，因为它在体验上并不是很友好。
+
+修复:
+1. 没有配置路径插件会失效。 [#3](https://github.com/pfzhengd/vue-i18n-manage/issues/3)
 
 ## v0.4.5  
 修复：

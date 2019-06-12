@@ -30,33 +30,28 @@
 	},
 	"homepage": "https://github.com/flyer-ui/vue-i18n-manage",
 	"main": "./out/extension.js",
+	"preview":true,
 	"contributes": {
-		"commands": [
-			{
-				"command": "extension.config",
-				"title": "Configure the path to the data source.",
-				"icon": {
-					"light": "imgs/logo.svg",
-					"dark": "imgs/logo.svg"
-				}
-			}
-		],
 		"configuration": {
 			"type": "object",
 			"title": "vue-i18n-manage",
 			"properties": {
-				"vue-i18n-manage.path": {
+				"vue-i18n-manage.localePath": {
 					"type": "string",
-					"default": "",
-					"description": "Path to recording the data source."
+					"default": ""
 				},
 				"vue-i18n-manage.primaryLanguage": {
 					"type": "string",
-					"default": "zh-CN",
-					"description": "Configure the current primary language, which will be used by the development environment to determine if the same text exists in the internationalized data source for that language."
+					"default": "zh-CN"
 				}
 			}
-		}
+		},
+		"keybindings":[
+			{
+				"command": "extension.config",
+				"key": "ctrl+p"
+			}
+		]
 	},
 	"scripts": {
 		"vscode:prepublish": "npm run compile",
@@ -75,5 +70,6 @@
 	"dependencies": {
 		"deepmerge": "^3.2.0",
 		"small-linked-list": "0.0.3"
-	}
+	},
+	"qna": "https://github.com/pfzhengd/vue-i18n-manage/issues"
 }

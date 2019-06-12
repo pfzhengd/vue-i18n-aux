@@ -1,5 +1,15 @@
 # Change Log
 
+## v0.4.6 (2019-06-12)
+Release:
+1. When the plugin is activated, it will automatically match the path with the path locale.
+
+Optimization:
+1. Undefined Chinese and English items, floating will prompt undefined. [#2](https://github.com/pfzhengd/vue-i18n-manage/issues/2)
+2. Removed the path configuration because it is not very friendly in terms of experience.
+Fixed:
+1.  No configuration path plugin will be invalid. [#3](https://github.com/pfzhengd/vue-i18n-manage/issues/3)
+
 ## v0.4.5
 Fixed:
 1. Direct reference to the text of the same key, has a chance to emerge bug.

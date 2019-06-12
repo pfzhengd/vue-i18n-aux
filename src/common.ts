@@ -68,7 +68,7 @@ export class Common {
    * @memberof Common
    */
   static getConfigPath(): string | undefined {
-    return vscode.workspace.getConfiguration(this.key).get("path");
+    return vscode.workspace.getConfiguration(this.key).get("localePath");
   }
 
   /**
@@ -156,7 +156,7 @@ export class Common {
     });
     const path: string =
       directory && directory.length > 0 ? directory[0].fsPath : "";
-    vscode.workspace.getConfiguration(this.key).update("path", path);
+    vscode.workspace.getConfiguration(this.key).update("localePath", path);
   }
 
   /**
@@ -208,6 +208,20 @@ export class Common {
     }
   }
 
+  static getDefaultPath(): string {
+    const folders = vscode.workspace.workspaceFolders;
+    if (folders && folders.length > 0) {
+      const projectUri = folders[0].uri.fsPath;
+      try {
+        return path.resolve(projectUri, "src/locale");
+      } catch (ex) {
+        return '';
+      }
+    } else {
+      return '';
+    }
+  }
+
   /**
    * Determine whether the parameters of the text
    * already exists in the international source.
@@ -243,7 +257,7 @@ export class Common {
     }
     if (typeof data[primaryLanguage] === "undefined") {
       vscode.window.showWarningMessage(`
-      The internationalization directory for PrimaryLanguage in the configuration file was not found.
+      The internationalization directory for [${primaryLanguage}] in the configuration file was not found.
       `);
     }
     const result: result = {
@@ -271,7 +285,7 @@ export class Common {
   }
 
   static deepFind(target: object | string, key: string, text: string, result: result) {
-    if(!result.end){
+    if (!result.end) {
       result.key.push(key);
     }
     if (target === text) {

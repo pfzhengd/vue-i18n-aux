@@ -22,6 +22,10 @@ class Extracted implements vscode.CodeActionProvider {
     if (!text) {
       return [];
     }
+    //Fix:https://github.com/pfzhengd/vue-i18n-manage/issues/3
+    if (!Common.validConfigPath()) {
+      Common.doPromptConfigLocale();
+    }
     let { base } = path.parse(document.fileName);
     base = base.replace(document.languageId, "json");
     const hasText: option | null = Common.findSourceByText(text);

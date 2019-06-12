@@ -43,6 +43,9 @@ class Preview implements vscode.HoverProvider {
       const value = compiler.toText(i18nKey,source);
       if (value) {
         html.push(this.formatter(langType, value));
+      }else{
+        //Fix:https://github.com/pfzhengd/vue-i18n-manage/issues/2
+        html.push(this.formatter(langType,'undefined.'));
       }
     });
     return html.join("\n\n");

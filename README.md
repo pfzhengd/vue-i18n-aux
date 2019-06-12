@@ -17,11 +17,10 @@ lightweight.
 
 1. Install vue-i18n
 2. Install vue-i18n-manage
-3. In the settings.json file, set your internationalization file path.
-4. In the settings.json file, set the main language you are developing.
+3. Set primaryLanguage in settings.json
 
 ## Features
-1. I18n preview  
+1. Preview i18n
 2. Extract the selected text to automatically generate the key
 
 
@@ -70,11 +69,8 @@ window.instance = new Vue({
 
 ```
 
-## About configuration  
+## configuration  
 ```
-  // Set your internationalization file path.
-  "vue-i18n-manage.path": "",       
-
   // Set the main language you are developing.
   "vue-i18n-manage.primaryLanguage": "zh-CN"      
 ```
