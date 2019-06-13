@@ -301,4 +301,17 @@ export class Common {
       });
     }
   }
+
+  static getDefaultFileName():string{
+    const fileName:string|undefined = vscode.workspace.getConfiguration(this.key).get("defaultFileName");
+    return fileName ? fileName : '';
+  }
+
+  static updateDefaultFileName(fileName:string):void{
+    if(fileName){
+      vscode.workspace.getConfiguration(this.key).update("defaultFileName", fileName);
+    }else{
+      vscode.window.showErrorMessage(`The filename [${fileName}] is invalid.`);
+    }
+  }
 }

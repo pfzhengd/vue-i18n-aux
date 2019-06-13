@@ -124,13 +124,15 @@ async function convert({
   } else {
     let key: string | undefined = undefined;
     key = await vscode.window.showInputBox({
-      placeHolder: "Enter the key to be converted,for example:lang.demo.key"
+      placeHolder: "Enter the key to be converted,for example:lang.demo.key",
+      value:Common.getDefaultFileName()
     });
     if (key) {
       const enterKey: EnterKey | null = parseKey(key);
       if (enterKey) {
         key = enterKey.i18n;
         fileName = enterKey.fileName.replace(":", ".json");
+        Common.updateDefaultFileName(enterKey.fileName);
       }
       const data = Common.getData();
       let hasKey: boolean = false;

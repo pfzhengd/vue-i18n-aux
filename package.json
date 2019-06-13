@@ -43,6 +43,10 @@
 				"vue-i18n-manage.primaryLanguage": {
 					"type": "string",
 					"default": "zh-CN"
+				},
+				"vue-i18n-manage.defaultFileName": {
+					"type": "string",
+					"default": ""
 				}
 			}
 		},
