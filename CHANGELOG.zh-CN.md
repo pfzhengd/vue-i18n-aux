@@ -1,4 +1,9 @@
 # Change Log
+
+## v0.5.0 (2019/06/13)
+发布功能：:
+1. 输入key值的文本框增加了文件名缓存功能。 [#4](https://github.com/pfzhengd/vue-i18n-manage/issues/4)
+
 ## v0.4.6 (2019/06/12)
 发布功能：
 1. 插件激活时会自动匹配一次路径为locale的路径。

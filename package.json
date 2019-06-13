@@ -1,7 +1,7 @@
 {
 	"name": "vue-i18n-manage",
 	"displayName": "Vue i18n Manage",
-	"description": "A plguin based on vscode that is targeted for international file management.",
+	"description": "A vscode plugin for managing i18n files and auxiliary vue-i18n code.",
 	"publisher": "vue-i18n-manage",
 	"version": "0.4.6",
 	"engines": {

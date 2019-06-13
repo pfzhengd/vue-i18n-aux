@@ -1,5 +1,9 @@
 # Change Log
 
+## v0.5.0 (2019-06-13)
+Release:
+1. The file name adds input caching. [#4](https://github.com/pfzhengd/vue-i18n-manage/issues/4)
+
 ## v0.4.6 (2019-06-12)
 Release:
 1. When the plugin is activated, it will automatically match the path with the path locale.
