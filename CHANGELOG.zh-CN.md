@@ -1,7 +1,7 @@
 # Change Log
 
 ## v0.5.0 (2019/06/13)
-发布功能：:
+发布功能：
 1. 输入key值的文本框增加了文件名缓存功能。 [#4](https://github.com/pfzhengd/vue-i18n-manage/issues/4)
 
 优化：
