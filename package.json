@@ -1,6 +1,6 @@
 {
-	"name": "vue-i18n-manage",
-	"displayName": "Vue i18n Manage",
+	"name": "vue-i18n-aux",
+	"displayName": "Vue-i18n-aux",
 	"description": "A vscode plugin for managing i18n files and auxiliary vue-i18n code.",
 	"publisher": "vue-i18n-manage",
 	"version": "0.5.0",
