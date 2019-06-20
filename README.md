@@ -2,7 +2,7 @@
   <img src='https://raw.githubusercontent.com/flyer-ui/vue-i18n-manage/master/imgs/logo.png' alt='logo' width='160'/> 
 </p>
 
-## Vue i18n manage
+## Vue i18n aux
 A VS Code plugin for international file management. 
 ```
 I didn't do the automatic translation function because the translation 
