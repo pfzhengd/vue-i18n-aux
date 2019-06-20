@@ -1,67 +1,72 @@
 # Change Log
 
-## v0.5.0 (2019-06-13)
-Release:
-1. The file name adds input caching. [#4](https://github.com/pfzhengd/vue-i18n-manage/issues/4)
+## v0.5.1 (2019/06/20)
+优化：
+1. 更新未找到对应i18n-key描述。
 
-Optimization:
-1. Updated the plugin's logo.
-2. Updated the description of the plugin in the library.
+## v0.5.0 (2019/06/13)
+发布功能：
+1. 输入key值的文本框增加了文件名缓存功能。 [#4](https://github.com/pfzhengd/vue-i18n-manage/issues/4)
 
-## v0.4.6 (2019-06-12)
-Release:
-1. When the plugin is activated, it will automatically match the path with the path locale.
+优化：
+1. 更新了插件的Logo外观。
+2. 更新了插件在库中的描述。
 
-Optimization:
-1. Undefined Chinese and English items, floating will prompt undefined. [#2](https://github.com/pfzhengd/vue-i18n-manage/issues/2)
-2. Removed the path configuration because it is not very friendly in terms of experience.
-Fixed:
-1.  No configuration path plugin will be invalid. [#3](https://github.com/pfzhengd/vue-i18n-manage/issues/3)
+## v0.4.6 (2019/06/12)
+发布功能：
+1. 插件激活时会自动匹配一次路径为locale的路径。
 
-## v0.4.5
-Fixed:
-1. Direct reference to the text of the same key, has a chance to emerge bug.
-2. The icon for configuring the text path in the menu bar in the upper right corner is removed.
+优化:
+1. 未定义的中英文项，悬浮会提示undefined [#2](https://github.com/pfzhengd/vue-i18n-manage/issues/2)  
+2. 去掉了path配置，因为它在体验上并不是很友好。
+
+修复:
+1. 没有配置路径插件会失效。 [#3](https://github.com/pfzhengd/vue-i18n-manage/issues/3)
+
+## v0.4.5  
+修复：
+1. 直接引用相同文本的key，有几率出现bug的问题。
+2. 去掉了右上角菜单栏配置文本路径的图标。
 
 ## v0.4.1
-Release:
-1. The supported command format is: filename:Key, for example: HelloWorld:lang.demo.key, where HelloWorld is the specified file name and lang.demo.key is the i18n key.
+发布功能：
+1. 支持命令为：文件名:国际化Key 的格式，例如：HelloWorld:lang.demo.key，其中HelloWorld为指定的文件名，lang.demo.key为国际化key的层级。
 
 ## v0.3.1
-Fixed:
-1. Updated the README.md file.
-2. Fix a bug where the icon on the toolbar is too small.
+修复:
+1. 更新了README.md文件。
+2. 修复工具条上图标太小的bug。
 
 ## v0.3.0  
-Release:  
-1. If the configured internationalized key value already exists, you will be prompted to confirm the override before replacing the text.
-2. If the internationalized key has a . sign split, it will be parsed into the corresponding level data object.
+发布功能：  
+1. 如果配置的国际化key值已经存在，替换文本之前会先进行提示是否确认覆盖。
+2. 如果国际化的key中带有.号分割，则会解析成对应层级的数据对象
 
-## v0.2.3
-Fixed：
-1. Restore the logo style of v0.2.1.
+## v0.2.3  
+修复：
+1. 还原v0.2.1版本的logo样式
 
 ## v0.2.2
-Fixed:
-1. If the value of primaryLanguage in the configuration file is set incorrectly, the small light bulb will not be displayed.
+修复：
+1. 如果配置文件中的primaryLanguage的值设置不正确，小灯泡会不显示出来。
 
 ## v0.2.1
-Fixed:
-1. Optimize the wrong format of the content in the readme file.
+修复：
+1. 优化readme文件中内容的错误格式。
 
 ## v0.2.0
-Release:
-1. The plugin only activates projects that have vue-i18n dependencies installed.
-2. When the extracted text is converted to a key, it will first detect whether the text already exists.
+发布功能：
+1. 插件只对安装有vue-i18n依赖的项目进行激活。
+2. 提取文本转换成key时会先检测是否之前已经存在这个文本。
 
-Fixed:
-1. When using i18n conversion,the quotes of the string are not removed.
+修复：
+1. 使用i18n转换时，没有去掉字符串的引号。
 
 ## v0.1.1
-Fixed：  
-1. A bug that needs to be manually activated after installing the plugin.
+修复：
+1. 安装后需要手动激活使用的bug
 
-## v0.1.0  
-Release:  
-1. i18n preview.   
-2. extract the selected text,gnerate an i18n key.
+## v0.1.0
+发布功能：
+1. 国际化预览  
+2. 提取选择后的文本，生成国际化key  
