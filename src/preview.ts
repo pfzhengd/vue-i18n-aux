@@ -45,7 +45,7 @@ class Preview implements vscode.HoverProvider {
         html.push(this.formatter(langType, value));
       }else{
         //Fix:https://github.com/pfzhengd/vue-i18n-manage/issues/2
-        html.push(this.formatter(langType,'undefined.'));
+        html.push(this.formatter(langType,`未找到${i18nKey}对应的描述。`));
       }
     });
     return html.join("\n\n");
