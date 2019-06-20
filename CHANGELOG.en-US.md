@@ -1,6 +1,6 @@
 # Change Log
 
-## v0.5.1 (2019/06/20)
+## v0.5.2 (2019/06/20)
 Optimization:
 1. Optimization did not find a description of i18n-key.
 
