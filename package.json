@@ -3,7 +3,7 @@
 	"displayName": "Vue-i18n-aux",
 	"description": "A vscode plugin for managing i18n files and auxiliary vue-i18n code.",
 	"publisher": "vue-i18n-manage",
-	"version": "0.5.0",
+	"version": "0.5.1",
 	"engines": {
 		"vscode": "^1.33.0"
 	},
