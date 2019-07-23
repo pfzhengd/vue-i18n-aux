@@ -245,7 +245,7 @@ export class Common {
    * @returns {(object | null)}
    * @memberof Common
    */
-  static findSourceByText(text: string): option | null {
+  static findSourceByText(text: string): object | null {
     text = text.trim();
     const data: object = this.getData();
     const primaryLanguage: string =
@@ -260,57 +260,39 @@ export class Common {
       The internationalization directory for [${primaryLanguage}] in the configuration file was not found.
       `);
     }
-    const result: result = {
-      end: false,
-      key: [],
-      value: ""
-    };
+    const result: object = {}
     const key: string | undefined = Object.keys(
       data[primaryLanguage] || {}
     ).find(key => {
       this.deepFind(data[primaryLanguage][key], key, text, result);
-      if (!result.end) {
-        result.key = [];
-      }
-      return result.value.length > 0;
+      return Object.getOwnPropertyNames(result).length>0;
     });
 
-    if (key) {
-      return {
-        key: result.key.join('.'),
-        value: result.value
-      };
-    }
-    return null;
+    return result;
   }
 
-  static deepFind(target: object | string, key: string, text: string, result: result) {
-    if (!result.end) {
-      result.key.push(key);
+  static deepFind(target: object | string, parentKey: string = '', text: string = '', output: object) {
+    if (this.isPlainObject(target)) {
+      Object.keys(target).forEach(key => {
+        this.deepFind(target[key], `${parentKey}${key}.`, text, output);
+      })
+    } else {
+      if (target === text) {
+        output[parentKey] = target.toString();
+      }
     }
-    if (target === text) {
-      result.end = true;
-      result.value = target;
-    }
-    if (this.isPlainObject(target) && !result.end) {
-      Object.keys(target).map(partKey => {
-        this.deepFind(target[partKey], partKey, text, result);
-        if (!result.end) {
-          result.key.pop();
-        }
-      });
-    }
+    return output;
   }
 
-  static getDefaultFileName():string{
-    const fileName:string|undefined = vscode.workspace.getConfiguration(this.key).get("defaultFileName");
+  static getDefaultFileName(): string {
+    const fileName: string | undefined = vscode.workspace.getConfiguration(this.key).get("defaultFileName");
     return fileName ? fileName : '';
   }
 
-  static updateDefaultFileName(fileName:string):void{
-    if(fileName){
+  static updateDefaultFileName(fileName: string): void {
+    if (fileName) {
       vscode.workspace.getConfiguration(this.key).update("defaultFileName", fileName);
-    }else{
+    } else {
       vscode.window.showErrorMessage(`The filename [${fileName}] is invalid.`);
     }
   }
