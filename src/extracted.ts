@@ -2,9 +2,11 @@ import * as vscode from "vscode";
 import * as path from "path";
 import { Common } from "./common";
 import * as fs from "fs";
+import { option } from "./type/option";
 import Compiler from "./compiler";
 import * as merge from "deepmerge";
 import { EnterKey } from "./type/enterKey";
+
 
 const enum I18nType {
   $t,
@@ -26,13 +28,13 @@ class Extracted implements vscode.CodeActionProvider {
     }
     let { base } = path.parse(document.fileName);
     base = base.replace(document.languageId, "json");
-    const hasText: object | null = Common.findSourceByText(text);
+    const hasText: option | null = Common.findSourceByText(text);
 
     let args = [
       {
         command: "extension.converter",
         title: hasText
-          ? `Reference [${hasText}] as $t`
+          ? `Reference [${hasText.key}] as $t`
           : "Extracted the text as $t",
         arguments: [
           {
@@ -47,7 +49,7 @@ class Extracted implements vscode.CodeActionProvider {
       {
         command: "extension.converter",
         title: hasText
-          ? `Reference [${hasText}] as this.$t`
+          ? `Reference [${hasText.key}] as this.$t`
           : "Extracted the text as this.$t",
         arguments: [
           {
