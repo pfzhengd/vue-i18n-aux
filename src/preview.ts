@@ -24,13 +24,13 @@ class Preview implements vscode.HoverProvider {
   getI18nkey(document: vscode.TextDocument, position: vscode.Position): string {
     const range: vscode.Range | undefined = document.getWordRangeAtPosition(
       position,
-      /\$t\([^\)]+\)/gi
+      /t\([^\)]+\)/gi
     );
     if (!range) {
       return "";
     }
     const text: string = document.getText(range);
-    return text.replace(/\$t|\(|\)|'|"/gi, "");
+    return text.replace(/t\(|\)|'|"/gi, "");
   }
 
   render(i18nKey: string): string {
